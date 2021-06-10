@@ -1,19 +1,24 @@
 package com.qa.errortracker.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Developer {
 
 	@Id
-	// add autoincrement
 	private Long id;
 	
 	private String name;
 
+	@ManyToMany
+	private List<GluaError> errors;
+	
 	public Developer() {
-		super();
+	
 	}
 
 	public Long getId() {
