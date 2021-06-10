@@ -4,9 +4,10 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
-public class Error {
+public class GluaError {
 
 	@Id
 	private String hash;
@@ -15,10 +16,10 @@ public class Error {
 	private String stack;
 	
 	private Integer count;
-	
+	@ManyToMany
 	private List<Developer> developers;
 	
-	public Error() {
+	public GluaError() {
 		
 	}
 
@@ -82,7 +83,7 @@ public class Error {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Error other = (Error) obj;
+		GluaError other = (GluaError) obj;
 		if (count == null) {
 			if (other.count != null)
 				return false;
