@@ -2,32 +2,18 @@ package com.qa.errortracker.domain;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+public class GluaErrorDTO {
 
-@Entity
-public class GluaError {
-/* 
-{
-	"hash" = "2450691011",
-	"realm" = "sv",
-	"shortErr" = "gamemodes/starwarsrp/gamemode/modules/lightsaber_system/weapons/weapon_lightsaber_base/init.lua:271: attempt to index a nil value",
-	"stack" = "1. unknown - gamemodes/starwarsrp/gamemode/modules/lightsaber_system/weapons/weapon_lightsaber_base/init.lua:271"
-}	
-*/
-	
-	@Id
 	private String hash;
 	
 	private String shortErr;
 	private String stack;
 	
 	private Integer count;
-	@ManyToMany
-	private List<Developer> developers;
 	
-	public GluaError() {
+	private List<DeveloperDTO> developers;
+	
+	public GluaErrorDTO() {
 		
 	}
 
@@ -63,11 +49,11 @@ public class GluaError {
 		this.count = count;
 	}
 
-	public List<Developer> getDevelopers() {
+	public List<DeveloperDTO> getDevelopers() {
 		return developers;
 	}
 
-	public void setDevelopers(List<Developer> developers) {
+	public void setDevelopers(List<DeveloperDTO> developers) {
 		this.developers = developers;
 	}
 
@@ -76,7 +62,6 @@ public class GluaError {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((count == null) ? 0 : count.hashCode());
-		result = prime * result + ((developers == null) ? 0 : developers.hashCode());
 		result = prime * result + ((hash == null) ? 0 : hash.hashCode());
 		result = prime * result + ((shortErr == null) ? 0 : shortErr.hashCode());
 		result = prime * result + ((stack == null) ? 0 : stack.hashCode());
@@ -91,16 +76,11 @@ public class GluaError {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GluaError other = (GluaError) obj;
+		GluaErrorDTO other = (GluaErrorDTO) obj;
 		if (count == null) {
 			if (other.count != null)
 				return false;
 		} else if (!count.equals(other.count))
-			return false;
-		if (developers == null) {
-			if (other.developers != null)
-				return false;
-		} else if (!developers.equals(other.developers))
 			return false;
 		if (hash == null) {
 			if (other.hash != null)
