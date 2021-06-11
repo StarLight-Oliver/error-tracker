@@ -35,4 +35,9 @@ public class ErrorController {
 	public GluaErrorDTO get(@PathVariable String hash) {
 		return this.service.get(hash);
 	}
+	
+	@DeleteMapping("/delete/{hash}")
+	public boolean delete(@PathVariable String hash) {
+		return this.service.delete(hash);
+	}
 }
