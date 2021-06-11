@@ -26,4 +26,13 @@ public class ErrorController {
 		return this.service.create(err);
 	}
 		
+	@GetMapping("/getAll")
+	public List<GluaErrorDTO> getAll() {
+		return this.service.getAll();
+	}
+	
+	@GetMapping("/get/{hash}")
+	public GluaErrorDTO get(@PathVariable String hash) {
+		return this.service.get(hash);
+	}
 }

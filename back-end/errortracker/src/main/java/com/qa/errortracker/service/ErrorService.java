@@ -1,5 +1,10 @@
 package com.qa.errortracker.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +27,15 @@ public class ErrorService {
 	
 	public GluaErrorDTO create(GluaError err) {
 		return this.mapper.toDTO(this.repo.save(err));
+	}
+	
+	public List<GluaErrorDTO> getAll() {
+		return this.repo.findAll().stream().map(err -> this.mapper.toDTO(err)).collect(Collectors.toList());
+	}
+	
+	public GluaErrorDTO get(String hash) {
+		GluaError existing = this.repo.findById(hash).orElseThrow(() -> new EntityNotFoundException());
+		
+		return this.mapper.toDTO(existing);
 	}
 }
