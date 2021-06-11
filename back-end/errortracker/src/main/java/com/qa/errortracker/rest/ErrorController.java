@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.qa.errortracker.domain.GluaError;
+import com.qa.errortracker.domain.GluaErrorDTO;
 import com.qa.errortracker.service.ErrorService;
 
 @RestController
@@ -21,7 +22,7 @@ public class ErrorController {
 	}
 	
 	@PostMapping("/create")
-	public GluaError create(@RequestBody GluaError err) {
+	public GluaErrorDTO create(@RequestBody GluaError err) {
 		return this.service.create(err);
 	}
 		

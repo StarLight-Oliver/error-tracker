@@ -1,8 +1,11 @@
 package com.qa.errortracker.utils;
 
+import org.springframework.stereotype.Service;
+
 import com.qa.errortracker.domain.GluaError;
 import com.qa.errortracker.domain.GluaErrorDTO;
 
+@Service
 public class GluaErrorMapper implements Mapper<GluaErrorDTO, GluaError> {
 
 	@Override

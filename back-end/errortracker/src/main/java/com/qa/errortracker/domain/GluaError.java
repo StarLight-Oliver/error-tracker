@@ -8,7 +8,15 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class GluaError {
-
+/* 
+{
+	"hash" = "2450691011",
+	"realm" = "sv",
+	"shortErr" = "gamemodes/starwarsrp/gamemode/modules/lightsaber_system/weapons/weapon_lightsaber_base/init.lua:271: attempt to index a nil value",
+	"stack" = "1. unknown - gamemodes/starwarsrp/gamemode/modules/lightsaber_system/weapons/weapon_lightsaber_base/init.lua:271"
+}	
+*/
+	
 	@Id
 	private String hash;
 	
