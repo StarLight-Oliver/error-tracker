@@ -23,7 +23,7 @@
 hs_err_pid*
 node_modules/*
 *.sqlite
-front-end/package-lock.json
-front-end/dist/*
-front-end/.vs/front-end/v16/.suo
-front-end/.vs/ProjectSettings.json
+package-lock.json
+dist/*
+.vs/front-end/v16/.suo
+.vs/ProjectSettings.json
