@@ -24,6 +24,9 @@ public class GluaError {
 	private String stack;
 	
 	private Integer count;
+	
+	private Short state;
+	
 	@ManyToMany
 	private List<Developer> developers;
 	
@@ -71,6 +74,14 @@ public class GluaError {
 		this.developers = developers;
 	}
 
+	public Short getState() {
+		return state;
+	}
+
+	public void setState(Short state) {
+		this.state = state;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,6 +91,7 @@ public class GluaError {
 		result = prime * result + ((hash == null) ? 0 : hash.hashCode());
 		result = prime * result + ((shortErr == null) ? 0 : shortErr.hashCode());
 		result = prime * result + ((stack == null) ? 0 : stack.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
 
@@ -116,6 +128,11 @@ public class GluaError {
 			if (other.stack != null)
 				return false;
 		} else if (!stack.equals(other.stack))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
 			return false;
 		return true;
 	}
