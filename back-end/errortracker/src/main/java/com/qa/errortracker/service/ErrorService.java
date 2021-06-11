@@ -38,4 +38,9 @@ public class ErrorService {
 		
 		return this.mapper.toDTO(existing);
 	}
+	
+	public boolean delete(String hash) {
+		this.repo.deleteById(hash);
+		return !this.repo.existsById(hash);
+	}
 }
