@@ -117,13 +117,14 @@ var openModal;
 					ev.preventDefault();
 				
 					let data = {
+						hash : CRC32.bstr(shortErr.value + stack.value  + realm.value),
 						shortErr: shortErr.value,
 						stack: stack.value,
 						realm: realm.value,
 					}
 
 					let a = async ()=> {
-						let b = await axois.post("/api/error/create", data)
+						let b = await axios.post("/api/error/create", data)
 						console.log(b.data);
 					}
 
