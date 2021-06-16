@@ -39,6 +39,20 @@ public class ErrorService {
 		return this.mapper.toDTO(existing);
 	}
 	
+	public GluaErrorDTO update(GluaError err, String hash) {
+		GluaError existing = this.repo.findById(hash).orElseThrow(() -> new EntityNotFoundException());
+		
+		existing.setCount(err.getCount());
+		existing.setDevelopers(err.getDevelopers());
+		existing.setName(err.getName());
+		existing.setState(err.getState());
+				
+		GluaError updated = this.repo.save(existing);
+		
+		return this.mapper.toDTO(updated);
+		
+	}
+	
 	public boolean delete(String hash) {
 		this.repo.deleteById(hash);
 		return !this.repo.existsById(hash);
