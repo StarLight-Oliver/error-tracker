@@ -3,6 +3,7 @@ const realmNames = ["Server", "Client", "Shared"]
 
 var openModal;
 var makeCard;
+var getAllDevs;
 
 ( (modal,closeBtn, modalBg, titleBg)=>{
 
@@ -178,9 +179,6 @@ var makeCard;
 	]
 
 	let handleCardOpening = (bg, data, card)=> {
-		// list devs at the top
-		// add plus button
-		// list short error
 
 		let shortErr = document.createElement("p");
 		shortErr.innerText = data.shortErr
@@ -196,11 +194,69 @@ var makeCard;
 		developerHead.classList.add("text-center", "text-lg");
 		developerHead.innerText = "Developers"
 
-
 		bg.appendChild(developerHead);
 
-		// Loop through all developers
+		let developerDiv = document.createElement("div");
 
+		let listDevs = async function() {
+			for (let data of card.data.developers) {
+				let devbutton = document.createElement("button")
+				devbutton.innerText = data.name;
+				devbutton.data = data;
+				devbutton.classList.add("bg-blue-400")
+
+				devbutton.addEventListener("click", function(ev) {
+					ev.preventDefault();
+					
+					let btn = this;
+					
+					let resp = confirm(`Are you sure you want to remove ${this.innerText} from the ticket?`);
+					if (resp) {
+						let removeDeveloper = async function() {
+							// let resp2 = await axios.delete("/api/developer/delete/" + btn.data.id)
+							// if (resp2.data) {
+							// 	btn.remove();
+							// }
+
+						}
+						removeDeveloper();
+					}
+				})
+
+				developerDiv.appendChild(devbutton);
+			}
+
+			let selector = document.createElement("select");
+			selector.innerText = "Add a Developer";
+			
+			let devs = getAllDevs();
+
+			for (let devI in devs) {
+				let option = document.createElement("option");
+				option.value = devI;
+				option.innerText = devs[devI].name;
+				selector.appendChild(option);
+			}
+
+			// add a click and then a combo select
+			developerDiv.appendChild(selector);
+
+			let btn = document.createElement("button");
+			btn.innerText = "Add Developer"
+
+			btn.addEventListener("click", async function(ev){
+				card.data.developers.push( devs[selector.value])
+				console.log(card.data)
+				let resp = await axios.put("/api/error/update/" + card.data.hash, card.data);				
+				console.log(resp);
+			})
+
+			developerDiv.appendChild(btn);
+		}
+
+		bg.appendChild(developerDiv);
+
+		listDevs();
 
 		let head = document.createElement("h4");
 		head.classList.add("text-center", "text-lg");
@@ -336,17 +392,16 @@ var makeCard;
 // Clearing dropdown menus
 window.onclick = function(event) {
 	if (!event.target.matches('.btn-dropdown')) {
-	  var dropdowns = document.getElementsByClassName("dropdown-content");
-	  var i;
-	  for (i = 0; i < dropdowns.length; i++) {
-		var openDropdown = dropdowns[i];
-		if (!openDropdown.classList.contains('hidden')) {
-		  openDropdown.classList.add('hidden');
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (!openDropdown.classList.contains('hidden')) {
+				openDropdown.classList.add('hidden');
+			}
 		}
-	  }
 	}
-  }
-
+}
 
 let menus = document.getElementsByClassName("btn-dropdown")
 
@@ -357,10 +412,19 @@ for (let but of menus) {
 	})
 };
 
-
 ( (devBtn, devList) => {
 
+	let devs = []
+
+
+	getAllDevs = function() {
+		return devs;
+	}
+
+
 	let addDeveloper = (data) => {
+		devs.push(data);
+
 		let devbutton = document.createElement("button")
 		devbutton.innerText = data.name;
 		devbutton.data = data;
@@ -381,7 +445,6 @@ for (let but of menus) {
 				deleteDeveloper();
 			}
 		})
-
 
 		let li = document.createElement("li");
 		li.appendChild(devbutton);

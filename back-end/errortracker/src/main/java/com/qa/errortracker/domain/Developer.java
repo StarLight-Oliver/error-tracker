@@ -2,13 +2,18 @@ package com.qa.errortracker.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Developer {
 
 	@Id
@@ -17,7 +22,7 @@ public class Developer {
 	
 	private String name;
 
-	@ManyToMany
+	@ManyToMany(targetEntity = GluaError.class, mappedBy = "developers", cascade = CascadeType.ALL )
 	private List<GluaError> errors;
 	
 	public Developer() {
