@@ -246,7 +246,7 @@ var makeCard;
 				card.data.state = index
 
 				let a = async ()=> {
-					let resp = await axios.put("/api/error/update", card.data);
+					let resp = await axios.put("/api/error/update/" + card.data.hash, card.data);
 					console.log(resp);
 				}
 

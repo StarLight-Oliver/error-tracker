@@ -36,6 +36,12 @@ public class ErrorController {
 		return this.service.get(hash);
 	}
 	
+	
+	@PutMapping("/update/{hash}")
+	public GluaErrorDTO update(@RequestBody GluaError err,  @PathVariable String hash) {
+		return this.service.update(err, hash);
+	}
+	
 	@DeleteMapping("/delete/{hash}")
 	public boolean delete(@PathVariable String hash) {
 		return this.service.delete(hash);
