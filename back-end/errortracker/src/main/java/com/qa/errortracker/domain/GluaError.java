@@ -1,7 +1,9 @@
 package com.qa.errortracker.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -24,12 +26,12 @@ public class GluaError {
 	private String stack;
 	private String name;
 	
-	private Integer count;
+	private Integer count = 1;
 	
 	private Short state;
 	
-	@ManyToMany
-	private List<Developer> developers;
+	@ManyToMany(targetEntity = Developer.class,cascade = CascadeType.ALL )
+	private List<Developer> developers = new ArrayList<>();
 	
 	public GluaError() {
 		
