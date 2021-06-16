@@ -38,8 +38,6 @@ var makeCard;
 
 	for( let index = 0; index<tBtns.length; index ++) {
 		const btn = tBtns[index]
-		console.log(btn, btn.addEventListener, index)
-
 
 		btn.addEventListener("click", function(ev) {
 			ev.preventDefault();
@@ -47,7 +45,7 @@ var makeCard;
 			openModal("Add new Error", (bg, closeBtn) => {
 				let form = document.createElement("form");
 				form.method = "post";
-				form.action = "/"
+				form.action = "/";
 				let fieldset = document.createElement("fieldset");
 
 				let legend = document.createElement("legend");
@@ -55,14 +53,14 @@ var makeCard;
 				fieldset.appendChild(legend);
 
 				let nameL = document.createElement("label");
-				nameL.for = args.name
-				nameL.innerText = "Name of Error"
+				nameL.for = args.name;
+				nameL.innerText = "Name of Error";
 				fieldset.appendChild(nameL);
 
 				let name = document.createElement("input")
-				name.type = "text"
-				name.id = args.name
-				name.name = args.name
+				name.type = "text";
+				name.id = args.name;
+				name.name = args.name;
 				fieldset.appendChild(name);
 
 				fieldset.appendChild(document.createElement("br"));
@@ -75,8 +73,8 @@ var makeCard;
 
 				let shortErr = document.createElement("input")
 				shortErr.type = "text"
-				shortErr.id = args.shortErr
-				shortErr.name = args.shortErr
+				shortErr.id = args.shortErr;
+				shortErr.name = args.shortErr;
 				fieldset.appendChild(shortErr);
 
 				fieldset.appendChild(document.createElement("br"));
@@ -91,8 +89,8 @@ var makeCard;
 				let stack = document.createElement("textarea");
 				stack.name = args.stack;
 				stack.id = args.stack;
-				stack.cols = 30
-				stack.rows = "5"
+				stack.cols = 30;
+				stack.rows = "5";
 
 				fieldset.append(stack);
 
@@ -101,20 +99,20 @@ var makeCard;
 
 				let realmL = document.createElement("label");
 				realmL.for = args.realm;
-				realmL.innerHTML = "What Realm did the error happen in"
+				realmL.innerHTML = "What Realm did the error happen in";
 				
 				fieldset.append(realmL);
 
 				let realm = document.createElement("select");
-				realm.name = args.realm
-				realm.id = args.realm
-				realm.classList.add("bg-gray-600")
+				realm.name = args.realm;
+				realm.id = args.realm;
+				realm.classList.add("bg-gray-600");
 
 				for (let i in realmNames) {
-					let option = document.createElement("option")
-					option.value = i
-					option.innerText = realmNames[i]
-					realm.append(option)
+					let option = document.createElement("option");
+					option.value = i;
+					option.innerText = realmNames[i];
+					realm.append(option);
 				}
 
 				fieldset.append(realm);
@@ -122,7 +120,7 @@ var makeCard;
 				fieldset.appendChild(document.createElement("br"));
 				fieldset.appendChild(document.createElement("br"));
 
-				let submit = document.createElement("input")
+				let submit = document.createElement("input");
 				form.appendChild(fieldset);
 				
 				submit.type = "submit"
@@ -130,9 +128,6 @@ var makeCard;
 				submit.classList.add("btn-blue")
 				
 				submit.addEventListener("click", function(ev) {
-					console.log("the click worked");
-					console.log(shortErr.value);
-					console.log(this.parentElement);
 					ev.preventDefault();
 				
 					let data = {
@@ -144,19 +139,15 @@ var makeCard;
 						name: name.value
 					}
 
-					let a = async ()=> {
+					let createError = async ()=> {
 						closeBtn.click();
-						let b = await axios.post("/api/error/create", data)
-						console.log(b.data); // if we got the data back
-						makeCard(b.data);
-						
-						
-						//makeCard(data);
+						let resp = await axios.post("/api/error/create", data)
+						if (resp.data) {
+							makeCard(resp.data);
+						}
 					}
 
-
-
-					a();
+					createError();
 				})
 
 
@@ -190,7 +181,6 @@ var makeCard;
 		// add plus button
 		// list short error
 
-		console.log(data);
 		let shortErr = document.createElement("p");
 		shortErr.innerText = data.shortErr
 		bg.appendChild(shortErr)
@@ -234,7 +224,6 @@ var makeCard;
 		
 		for (let index in stateData) {
 			let info = stateData[index];
-			console.log(info)
 			let working = document.createElement("button")
 			working.classList.add("btn-blue")
 			working.innerText = info.name
@@ -247,7 +236,6 @@ var makeCard;
 
 				let a = async ()=> {
 					let resp = await axios.put("/api/error/update/" + card.data.hash, card.data);
-					console.log(resp);
 				}
 
 				a();
@@ -279,7 +267,6 @@ var makeCard;
 
 			let deleteError = async ()=> {
 				let resp = await axios.delete("/api/error/delete/" + card.data.hash);
-				console.log(resp);
 				if (resp.data) {
 					card.remove();
 					closeBtn.click();
@@ -302,7 +289,6 @@ var makeCard;
 
 
 	makeCard = (data)=> {
-		console.log("making cards")
 		let button = document.createElement("button");
 		button.classList.add("error-card")
 
@@ -347,3 +333,90 @@ window.onclick = function(event) {
 	  }
 	}
   }
+
+
+let menus = document.getElementsByClassName("btn-dropdown")
+
+for (let but of menus) {
+	but.addEventListener("click", function(ev) {
+		ev.preventDefault();
+		but.nextElementSibling.classList.toggle("hidden");
+	})
+};
+
+
+( (devBtn, devList) => {
+
+	let addDeveloper = (data) => {
+		let devbutton = document.createElement("button")
+		devbutton.innerText = data.name;
+		devbutton.data = data;
+
+		let li = document.createElement("li");
+		li.appendChild(devbutton);
+		devList.appendChild(li);
+
+		devList.appendChild(devBtn);
+	}
+
+	devBtn.addEventListener("click", function(ev) {
+		ev.preventDefault();
+
+		let args = {
+			name: "name",
+		}
+
+		openModal("Add Developer", (bg, closeBtn) => {
+			let form = document.createElement("form");
+			let fieldset = document.createElement("fieldset")
+
+			let legend = document.createElement("legend");
+			legend.innerText = "Input the error details";
+			fieldset.appendChild(legend);
+
+			let nameL = document.createElement("label");
+			nameL.for = args.name;
+			nameL.innerText = "Name of Developer: ";
+			fieldset.appendChild(nameL);
+
+			let name = document.createElement("input");
+			name.type = "text";
+			name.id = args.name;
+			name.name = args.name;
+			name.classList.add("bg-gray-600", "px-2");
+			fieldset.appendChild(name);
+
+			form.appendChild(fieldset);
+
+			let submit = document.createElement("input")
+			submit.type = "submit";
+			submit.value= "Submit";
+			submit.classList.add("btn-blue");
+			
+			submit.addEventListener("click", function(ev) {
+				ev.preventDefault();
+
+				let data = {
+					name: name.value,
+				}
+
+				let createDeveloper = async() => {
+					let resp = await axios.post("/api/developer/create", data)
+					if (resp.data) {
+						addDeveloper(resp.data);
+						closeBtn.click();
+					}
+				}
+
+				createDeveloper();
+
+			})
+
+			form.appendChild(submit);
+			bg.appendChild(form);
+		})
+
+	})
+
+
+} )(document.getElementById("dev-btn"), document.getElementById("dev-list"));

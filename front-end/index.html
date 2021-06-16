@@ -23,9 +23,32 @@
 		</div>
 		
 		<nav class="bg-gray-300 mb-5 p-1">
-			<h1 class="text-4xl font-bold text-center text-blue-500">
+			<h1 class="text-4xl font-bold text-center text-blue-500 inline-block ml-16">
 				Error Tracker
 			</h1>
+
+			<div class="dropdown inline-block float-right mr-8">
+				<button class="btn-dropdown button inline-block">Developers</button>
+				<div class="dropdown-content bg-gray-500">
+					<ul id = "dev-list">
+						<li>
+							<button>
+								Oliver
+							</button>
+						</li>
+						<li>
+							<button>
+								Luke
+							</button>
+						</li>
+						<li>
+							<button id="dev-btn" class="bg-white rounded-md mx-2 px-2 my-2">
+								+
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</nav>
 
 	<article class = "h-full">
@@ -85,9 +108,9 @@
 						CARD
 					</div>
 				</div>
-				<footer class="bg-gray-800 py-2 absolute bottom-0 flex">
+				<footer class="content-center px-auto object-fill flex bg-gray-700 pt-2">
 					<div class="flex-grow"></div>
-					<button id="addDone" class="btn-blue add-error">Add Error</button>
+					<button id="addWorking" class="btn-blue add-error">Add Error</button>
 					<div class="flex-grow"></div>
 				</footer>
 			</div>
