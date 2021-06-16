@@ -22,6 +22,7 @@ public class GluaError {
 	
 	private String shortErr;
 	private String stack;
+	private String name;
 	
 	private Integer count;
 	
@@ -80,6 +81,14 @@ public class GluaError {
 
 	public void setState(Short state) {
 		this.state = state;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
