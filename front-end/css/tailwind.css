@@ -13,4 +13,12 @@
 	.realm-bar {
 		@apply h-full w-2 inline-block rounded-lg mr-10
 	}
+
+
+	.dropdown {
+		@apply relative inline-block
+	}
+	.dropdown-content {
+		@apply absolute min-w-min z-10
+	}
 }

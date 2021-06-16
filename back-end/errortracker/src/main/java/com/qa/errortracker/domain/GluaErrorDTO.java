@@ -6,12 +6,15 @@ public class GluaErrorDTO {
 
 	private String hash;
 	
+	private String name;
 	private String shortErr;
 	private String stack;
 	
 	private Integer count;
 	
 	private List<DeveloperDTO> developers;
+	
+	private Short state;
 	
 	public GluaErrorDTO() {
 		
@@ -55,6 +58,22 @@ public class GluaErrorDTO {
 
 	public void setDevelopers(List<DeveloperDTO> developers) {
 		this.developers = developers;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Short getState() {
+		return state;
+	}
+
+	public void setState(Short state) {
+		this.state = state;
 	}
 
 	@Override

@@ -23,7 +23,7 @@ var makeCard;
 		
 		titleBg.innerText = title;
 
-		func(modalBg, ...data);
+		func(modalBg, closeBtn, ...data);
 	}
 
 } )(document.getElementById("modal"), document.getElementById("modalBtn"), document.getElementById("modalBg"), document.getElementById("modalTitle"));
@@ -44,7 +44,7 @@ var makeCard;
 		btn.addEventListener("click", function(ev) {
 			ev.preventDefault();
 
-			openModal("Add new Error", (bg, data) => {
+			openModal("Add new Error", (bg, closeBtn) => {
 				let form = document.createElement("form");
 				form.method = "post";
 				form.action = "/"
@@ -145,10 +145,16 @@ var makeCard;
 					}
 
 					let a = async ()=> {
-						//let b = await axios.post("/api/error/create", data)
-						//console.log(b.data); // if we got the data back
-						makeCard(data);
+						let b = await axios.post("/api/error/create", data)
+						console.log(b.data); // if we got the data back
+						makeCard(b.data);
+						
+						
+						//makeCard(data);
+						//closeBtn.click();
 					}
+
+
 
 					a();
 				})
@@ -164,13 +170,119 @@ var makeCard;
 
 ( (todoDiv, workingDiv, fixedDiv) => {
 
+	let stateData= [
+		{
+			name: "Todo",
+			div: todoDiv,
+		},
+		{
+			name: "Working",
+			div: workingDiv,
+		},
+		{
+			name:"Fixed",
+			div: fixedDiv
+		}
+	]
+
+	let handleCardOpening = (bg, data, card)=> {
+		// list devs at the top
+		// add plus button
+		// list short error
+
+		console.log(data);
+		let shortErr = document.createElement("p");
+		shortErr.innerText = data.shortErr
+		bg.appendChild(shortErr)
+
+		let stack = document.createElement("p");
+		stack.classList.add("pl-4")
+		stack.innerText = data.stack
+
+		bg.appendChild(stack)
+
+		let developerHead = document.createElement("h4");
+		developerHead.classList.add("text-center", "text-lg");
+		developerHead.innerText = "Developers"
+
+
+		bg.appendChild(developerHead);
+
+		// Loop through all developers
+
+
+		let head = document.createElement("h4");
+		head.classList.add("text-center", "text-lg");
+		head.innerText = "Actions"
+
+		bg.appendChild(head)
+
+
+		
+		let dropdowndiv = document.createElement("div")
+		dropdowndiv.classList.add("dropdown")
+		
+		let move = document.createElement("button")
+		move.classList.add("btn-blue", "btn-dropdown")
+		move.innerText = "Move Error"
+		
+		
+		let listDiv = document.createElement("div")
+		listDiv.classList.add("hidden", "dropdown-content")
+		
+		dropdowndiv.appendChild(move)
+		
+		for (let index in stateData) {
+			let info = stateData[index];
+			console.log(info)
+			let working = document.createElement("button")
+			working.classList.add("btn-blue")
+			working.innerText = info.name
+
+			working.addEventListener("click", function(ev) {
+				ev.preventDefault();
+				info.div.appendChild(card);
+
+				card.data.state = index
+
+				let a = async ()=> {
+					let resp = await axios.post("/api/error/update", card.data);
+					console.log(resp);
+				}
+
+				a();
+			})
+	
+			listDiv.appendChild(working);
+		}
+
+		dropdowndiv.appendChild(listDiv)
+
+
+		move.addEventListener("click", function(ev) {
+			ev.preventDefault();
+
+			listDiv.classList.toggle("hidden");
+
+		})
+
+		bg.appendChild(dropdowndiv)
+		// <button id = "addTodo" class="btn-blue add-error">Add Error</button>
+
+	};
+
+
 	let realmColors = ["bg-blue-600", "bg-yellow-600", "bg-green-600"]
 	let divs = [todoDiv, workingDiv, fixedDiv]
+
 
 	makeCard = (data)=> {
 		console.log("making cards")
 		let button = document.createElement("button");
 		button.classList.add("error-card")
+
+		button.data = data;
+
 		let name = document.createElement("div");
 		name.classList.add("inline-block")
 		name.classList.add("flex-grow")
@@ -181,10 +293,32 @@ var makeCard;
 		realm.classList.add("realm-bar")
 		realm.classList.add(realmColors[data.realm])
 		
-		button.appendChild(name);
 		button.appendChild(realm);
+		button.appendChild(name);
 
-		divs[data.state].appendChild(button)
+		divs[data.state].appendChild(button);
+
+		button.addEventListener("click", function(ev) {
+			ev.preventDefault();
+			let btn = this;
+			openModal(data.name, (bg) => {
+				handleCardOpening(bg, data, btn);
+			})
+		})
 
 	}
 } )(document.getElementById("todo-div"), document.getElementById("working-div"), document.getElementById("fixed-div"))
+
+// Clearing dropdown menus
+window.onclick = function(event) {
+	if (!event.target.matches('.btn-dropdown')) {
+	  var dropdowns = document.getElementsByClassName("dropdown-content");
+	  var i;
+	  for (i = 0; i < dropdowns.length; i++) {
+		var openDropdown = dropdowns[i];
+		if (!openDropdown.classList.contains('hidden')) {
+		  openDropdown.classList.add('hidden');
+		}
+	  }
+	}
+  }
