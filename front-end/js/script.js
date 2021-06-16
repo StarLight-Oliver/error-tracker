@@ -321,9 +321,6 @@ var makeCard;
 	}
 
 
-
-
-
 	setTimeout( async function() {
 		let resp = await axios.get("/api/error/getAll")
 		if (resp.data) {
@@ -367,6 +364,24 @@ for (let but of menus) {
 		let devbutton = document.createElement("button")
 		devbutton.innerText = data.name;
 		devbutton.data = data;
+
+		devbutton.addEventListener("click", function(ev) {
+			ev.preventDefault();
+			
+			let btn = this;
+			
+			let resp = confirm(`Are you sure you want to delete ${this.innerText}?`);
+			if (resp) {
+				let deleteDeveloper = async function() {
+					let resp2 = await axios.delete("/api/developer/delete/" + btn.data.id)
+					if (resp2.data) {
+						btn.remove();
+					}
+				}
+				deleteDeveloper();
+			}
+		})
+
 
 		let li = document.createElement("li");
 		li.appendChild(devbutton);
