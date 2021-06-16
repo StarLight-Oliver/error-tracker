@@ -145,13 +145,13 @@ var makeCard;
 					}
 
 					let a = async ()=> {
+						closeBtn.click();
 						let b = await axios.post("/api/error/create", data)
 						console.log(b.data); // if we got the data back
 						makeCard(b.data);
 						
 						
 						//makeCard(data);
-						//closeBtn.click();
 					}
 
 
@@ -246,7 +246,7 @@ var makeCard;
 				card.data.state = index
 
 				let a = async ()=> {
-					let resp = await axios.post("/api/error/update", card.data);
+					let resp = await axios.put("/api/error/update", card.data);
 					console.log(resp);
 				}
 
@@ -266,7 +266,31 @@ var makeCard;
 
 		})
 
-		bg.appendChild(dropdowndiv)
+		bg.appendChild(dropdowndiv);
+
+
+		// DELETE BUTTON
+		let deleteBtn = document.createElement("button")
+		deleteBtn.classList.add("btn-blue")
+		deleteBtn.innerText = "Delete Error"
+
+		deleteBtn.addEventListener("click", function(ev){
+			ev.preventDefault();
+
+			let deleteError = async ()=> {
+				let resp = await axios.delete("/api/error/delete/" + card.data.hash);
+				console.log(resp);
+				if (resp.data) {
+					card.remove();
+				}
+			}
+
+			deleteError();
+
+		})
+
+		bg.appendChild(deleteBtn)
+
 		// <button id = "addTodo" class="btn-blue add-error">Add Error</button>
 
 	};
