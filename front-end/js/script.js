@@ -213,11 +213,12 @@ var getAllDevs;
 					let resp = confirm(`Are you sure you want to remove ${this.innerText} from the ticket?`);
 					if (resp) {
 						let removeDeveloper = async function() {
-							// let resp2 = await axios.delete("/api/developer/delete/" + btn.data.id)
-							// if (resp2.data) {
-							// 	btn.remove();
-							// }
+							card.data.developers = card.data.developers.filter(dev => dev !== data);
 
+							let resp2 = await axios.put("/api/error/update/" + card.data.hash, card.data);
+							if (resp2.data) {
+								devbutton.remove();
+							}
 						}
 						removeDeveloper();
 					}
@@ -245,10 +246,13 @@ var getAllDevs;
 			btn.innerText = "Add Developer"
 
 			btn.addEventListener("click", async function(ev){
-				card.data.developers.push( devs[selector.value])
-				console.log(card.data)
+				card.data.developers.push(devs[selector.value])
+
 				let resp = await axios.put("/api/error/update/" + card.data.hash, card.data);				
-				console.log(resp);
+
+				if (resp.data) {
+					card.click();
+				}
 			})
 
 			developerDiv.appendChild(btn);
@@ -376,7 +380,6 @@ var getAllDevs;
 
 	}
 
-
 	setTimeout( async function() {
 		let resp = await axios.get("/api/error/getAll")
 		if (resp.data) {
@@ -385,7 +388,6 @@ var getAllDevs;
 			}
 		}
 	}, 500)
-
 
 } )(document.getElementById("todo-div"), document.getElementById("working-div"), document.getElementById("fixed-div"))
 
@@ -416,11 +418,9 @@ for (let but of menus) {
 
 	let devs = []
 
-
 	getAllDevs = function() {
 		return devs;
 	}
-
 
 	let addDeveloper = (data) => {
 		devs.push(data);

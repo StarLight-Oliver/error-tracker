@@ -14,11 +14,18 @@
 		@apply h-full w-2 inline-block rounded-lg mr-10
 	}
 
-
 	.dropdown {
-		@apply relative inline-block
+		@apply relative inline-block max-w-full
 	}
 	.dropdown-content {
 		@apply absolute min-w-min z-10
+	}
+
+	input, select, textarea  {
+		@apply bg-gray-600 mx-2
+	}
+	
+	input, textarea {
+		@apply px-2
 	}
 }
