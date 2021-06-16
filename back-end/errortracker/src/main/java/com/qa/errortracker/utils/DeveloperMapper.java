@@ -13,7 +13,8 @@ public class DeveloperMapper implements Mapper<DeveloperDTO, Developer> {
 		DeveloperDTO dto = new DeveloperDTO();
 		
 		dto.setId(dev.getId());
-		
+		dto.setName(dev.getName());
+				
 		return dto;
 	}
 	
@@ -21,6 +22,7 @@ public class DeveloperMapper implements Mapper<DeveloperDTO, Developer> {
 	public Developer fromDTO(DeveloperDTO dto) {
 		Developer dev = new Developer();
 		dev.setId(dto.getId());
+		dev.setName(dto.getName());
 		
 		return dev;
 	}

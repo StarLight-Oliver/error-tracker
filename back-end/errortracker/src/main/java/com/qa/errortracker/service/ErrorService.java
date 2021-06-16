@@ -50,7 +50,6 @@ public class ErrorService {
 		GluaError updated = this.repo.save(existing);
 		
 		return this.mapper.toDTO(updated);
-		
 	}
 	
 	public boolean delete(String hash) {
