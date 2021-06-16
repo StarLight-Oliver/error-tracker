@@ -1,3 +1,4 @@
+
 const realmNames = ["Server", "Client", "Shared"]
 
 var openModal;
@@ -318,6 +319,21 @@ var makeCard;
 		})
 
 	}
+
+
+
+
+
+	setTimeout( async function() {
+		let resp = await axios.get("/api/error/getAll")
+		if (resp.data) {
+			for (let error of resp.data) {
+				makeCard(error);
+			}
+		}
+	}, 500)
+
+
 } )(document.getElementById("todo-div"), document.getElementById("working-div"), document.getElementById("fixed-div"))
 
 // Clearing dropdown menus
@@ -418,5 +434,13 @@ for (let but of menus) {
 
 	})
 
+	setTimeout( async function() {
+		let resp = await axios.get("/api/developer/getAll")
+		if (resp.data) {
+			for (let dev of resp.data) {
+				addDeveloper(dev);
+			}
+		}
+	}, 500)
 
 } )(document.getElementById("dev-btn"), document.getElementById("dev-list"));
