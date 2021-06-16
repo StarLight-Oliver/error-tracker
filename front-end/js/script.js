@@ -1,7 +1,7 @@
 const realmNames = ["Server", "Client", "Shared"]
 
 var openModal;
-
+var makeCard;
 
 ( (modal,closeBtn, modalBg, titleBg)=>{
 
@@ -32,10 +32,15 @@ var openModal;
 	const args = {
 		shortErr: "shortErr",
 		stack: "stack",
-		realm: "realm"
+		realm: "realm",
+		name: "error-name"
 	}
 
-	for( let btn of tBtns) {
+	for( let index = 0; index<tBtns.length; index ++) {
+		const btn = tBtns[index]
+		console.log(btn, btn.addEventListener, index)
+
+
 		btn.addEventListener("click", function(ev) {
 			ev.preventDefault();
 
@@ -48,6 +53,20 @@ var openModal;
 				let legend = document.createElement("legend");
 				legend.innerText = "Input the error details";
 				fieldset.appendChild(legend);
+
+				let nameL = document.createElement("label");
+				nameL.for = args.name
+				nameL.innerText = "Name of Error"
+				fieldset.appendChild(nameL);
+
+				let name = document.createElement("input")
+				name.type = "text"
+				name.id = args.name
+				name.name = args.name
+				fieldset.appendChild(name);
+
+				fieldset.appendChild(document.createElement("br"));
+				fieldset.appendChild(document.createElement("br"));
 
 				let shortErrL = document.createElement("label");
 				shortErrL.for = args.shortErr;
@@ -121,14 +140,17 @@ var openModal;
 						shortErr: shortErr.value,
 						stack: stack.value,
 						realm: realm.value,
+						state: index,
+						name: name.value
 					}
 
 					let a = async ()=> {
-						let b = await axios.post("/api/error/create", data)
-						console.log(b.data);
+						//let b = await axios.post("/api/error/create", data)
+						//console.log(b.data); // if we got the data back
+						makeCard(data);
 					}
 
-					a()
+					a();
 				})
 
 
@@ -138,5 +160,31 @@ var openModal;
 			})
 		})
 	}
-} )(document.getElementsByClassName("add-error"))
+} )(document.getElementsByClassName("add-error"));
 
+( (todoDiv, workingDiv, fixedDiv) => {
+
+	let realmColors = ["bg-blue-600", "bg-yellow-600", "bg-green-600"]
+	let divs = [todoDiv, workingDiv, fixedDiv]
+
+	makeCard = (data)=> {
+		console.log("making cards")
+		let button = document.createElement("button");
+		button.classList.add("error-card")
+		let name = document.createElement("div");
+		name.classList.add("inline-block")
+		name.classList.add("flex-grow")
+		name.innerText = `${data.hash}-${data.name}`
+		
+		
+		let realm = document.createElement("div");
+		realm.classList.add("realm-bar")
+		realm.classList.add(realmColors[data.realm])
+		
+		button.appendChild(name);
+		button.appendChild(realm);
+
+		divs[data.state].appendChild(button)
+
+	}
+} )(document.getElementById("todo-div"), document.getElementById("working-div"), document.getElementById("fixed-div"))
