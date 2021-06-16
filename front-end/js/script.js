@@ -282,6 +282,7 @@ var makeCard;
 				console.log(resp);
 				if (resp.data) {
 					card.remove();
+					closeBtn.click();
 				}
 			}
 
