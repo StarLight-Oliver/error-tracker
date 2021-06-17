@@ -81,9 +81,12 @@ public class GluaErrorDTO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((count == null) ? 0 : count.hashCode());
+		result = prime * result + ((developers == null) ? 0 : developers.hashCode());
 		result = prime * result + ((hash == null) ? 0 : hash.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((shortErr == null) ? 0 : shortErr.hashCode());
 		result = prime * result + ((stack == null) ? 0 : stack.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
 
@@ -101,10 +104,20 @@ public class GluaErrorDTO {
 				return false;
 		} else if (!count.equals(other.count))
 			return false;
+		if (developers == null) {
+			if (other.developers != null)
+				return false;
+		} else if (!developers.equals(other.developers))
+			return false;
 		if (hash == null) {
 			if (other.hash != null)
 				return false;
 		} else if (!hash.equals(other.hash))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		if (shortErr == null) {
 			if (other.shortErr != null)
@@ -115,6 +128,11 @@ public class GluaErrorDTO {
 			if (other.stack != null)
 				return false;
 		} else if (!stack.equals(other.stack))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
 			return false;
 		return true;
 	}
