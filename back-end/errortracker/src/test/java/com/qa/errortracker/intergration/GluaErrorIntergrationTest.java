@@ -50,7 +50,7 @@ public class GluaErrorIntergrationTest {
 	}
 	
 	@Test
-	void testGetAll() throws Exception { // need to fix up the script for this
+	void testGetAll() throws Exception { // need to move to a Before test
 		GluaError err = new GluaError();
 		err.setHash("-1802969628");
 		err.setStack("asdasdasdasdasdasd");
