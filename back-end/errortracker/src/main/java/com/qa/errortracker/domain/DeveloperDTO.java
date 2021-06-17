@@ -1,13 +1,9 @@
 package com.qa.errortracker.domain;
 
-import java.util.List;
-
 public class DeveloperDTO {
 	private Long id;
 	
 	private String name;
-
-	private List<String> errorHashes;
 	
 	public DeveloperDTO() {
 	
