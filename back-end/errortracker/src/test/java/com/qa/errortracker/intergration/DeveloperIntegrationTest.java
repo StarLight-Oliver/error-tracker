@@ -21,14 +21,13 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.errortracker.domain.Developer;
-import com.qa.errortracker.domain.GluaError;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @Sql(scripts = { "classpath:errortracker-schema.sql",
 		"classpath:errortracker-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 
-public class DeveloperIntegrationTest {
+class DeveloperIntegrationTest {
 	@Autowired
 	private MockMvc mvc;
 	

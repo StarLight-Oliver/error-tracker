@@ -25,7 +25,9 @@ public class ErrorService {
 		this.mapper = mapper;
 	}
 	
-	public GluaErrorDTO create(GluaError err) {
+	public GluaErrorDTO create(GluaErrorDTO errDTO) {
+		GluaError err = this.mapper.fromDTO(errDTO);
+		
 		return this.mapper.toDTO(this.repo.save(err));
 	}
 	
@@ -39,7 +41,9 @@ public class ErrorService {
 		return this.mapper.toDTO(existing);
 	}
 	
-	public GluaErrorDTO update(GluaError err, String hash) {
+	public GluaErrorDTO update(GluaErrorDTO errDTO, String hash) {
+		GluaError err = this.mapper.fromDTO(errDTO);
+		
 		GluaError existing = this.repo.findById(hash).orElseThrow(() -> new EntityNotFoundException());
 		
 		existing.setCount(err.getCount());

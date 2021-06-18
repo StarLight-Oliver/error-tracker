@@ -5,14 +5,14 @@ import com.qa.errortracker.domain.GluaErrorDTO;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
-public class GluaErrorTest {
+class GluaErrorTest {
 //	@Test
 //	public void testDAO() {
 //		EqualsVerifier.simple().forClass(GluaError.class).verify();
 //	}
 
 	@Test
-	public void testDTO() {
+	void testDTO() {
 		EqualsVerifier.simple().forClass(GluaErrorDTO.class).verify();
 	}
 }

@@ -15,8 +15,8 @@ public class GluaErrorDTO {
 	private List<DeveloperDTO> developers;
 	
 	private Short state;
-	
 	public GluaErrorDTO() {
+		// Empty because of spring
 		
 	}
 
@@ -78,8 +78,8 @@ public class GluaErrorDTO {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		var prime = 31;
+		var result = 1;
 		result = prime * result + ((count == null) ? 0 : count.hashCode());
 		result = prime * result + ((developers == null) ? 0 : developers.hashCode());
 		result = prime * result + ((hash == null) ? 0 : hash.hashCode());
