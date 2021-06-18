@@ -18,7 +18,7 @@ import com.qa.errortracker.service.DeveloperService;
 
 
 @SpringBootTest
-public class DeveloperServiceTest {
+class DeveloperServiceTest {
 	@Autowired
 	private DeveloperService service;
 	
