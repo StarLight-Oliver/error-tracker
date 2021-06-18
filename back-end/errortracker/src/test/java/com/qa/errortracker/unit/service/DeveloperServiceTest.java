@@ -26,6 +26,28 @@ class DeveloperServiceTest {
 	private DeveloperRepo repo;
 	
 	
+	@Test 
+	void testCreate() {
+		
+		Long Id = 1L;
+		String name = "Ollie";
+
+		Developer existing = new Developer();
+		existing.setName(name);
+		existing.setId(Id);
+
+		DeveloperDTO returning = new DeveloperDTO();
+		returning.setId(Id);
+		returning.setName(name);
+
+		Mockito.when(this.repo.save(existing)).thenReturn(existing);
+		
+		assertThat(this.service.create(returning)).isEqualTo(returning);
+		
+		Mockito.verify(this.repo, Mockito.times(1)).save(existing);
+	}
+
+
 	@Test
 	void testGet() {
 
