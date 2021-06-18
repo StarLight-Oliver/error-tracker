@@ -25,7 +25,9 @@ public class DeveloperService {
 		this.mapper = mapper;
 	}
 
-	public DeveloperDTO create(Developer dev) {
+	public DeveloperDTO create(DeveloperDTO devDTO) {
+		Developer dev = this.mapper.fromDTO(devDTO);
+				
 		return this.mapper.toDTO(this.repo.save(dev));
 	}
 	

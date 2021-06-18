@@ -10,7 +10,7 @@ public class DeveloperMapper implements Mapper<DeveloperDTO, Developer> {
 
 	@Override
 	public DeveloperDTO toDTO(Developer dev) {
-		DeveloperDTO dto = new DeveloperDTO();
+		var dto = new DeveloperDTO();
 		
 		dto.setId(dev.getId());
 		dto.setName(dev.getName());
@@ -20,7 +20,7 @@ public class DeveloperMapper implements Mapper<DeveloperDTO, Developer> {
 	
 	@Override
 	public Developer fromDTO(DeveloperDTO dto) {
-		Developer dev = new Developer();
+		var dev = new Developer();
 		dev.setId(dto.getId());
 		dev.setName(dto.getName());
 		

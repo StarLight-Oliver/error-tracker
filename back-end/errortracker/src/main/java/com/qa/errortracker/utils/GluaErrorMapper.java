@@ -24,7 +24,7 @@ public class GluaErrorMapper implements Mapper<GluaErrorDTO, GluaError> {
 	
 	@Override
 	public GluaErrorDTO toDTO(GluaError err) {
-		GluaErrorDTO dto = new GluaErrorDTO();
+		var dto = new GluaErrorDTO();
 		
 		dto.setHash(err.getHash());
 		dto.setName(err.getName());
@@ -44,7 +44,7 @@ public class GluaErrorMapper implements Mapper<GluaErrorDTO, GluaError> {
 	
 	@Override
 	public GluaError fromDTO(GluaErrorDTO dto) {
-		GluaError err = new GluaError();
+		var err = new GluaError();
 		err.setHash(dto.getHash());
 		err.setName(dto.getName());
 		err.setCount(dto.getCount());
@@ -52,7 +52,12 @@ public class GluaErrorMapper implements Mapper<GluaErrorDTO, GluaError> {
 		err.setStack(dto.getStack());
 		err.setState(dto.getState());
 		
-		// not sure how to map devDTO to devs
+		List<Developer> devs = new ArrayList<>();
+		for (DeveloperDTO devDTO : dto.getDevelopers()) {
+			devs.add(this.mapper.fromDTO(devDTO));
+		}
+		err.setDevelopers(devs);
+		
 		return err;
 	}
 	

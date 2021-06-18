@@ -28,7 +28,7 @@ import com.qa.errortracker.domain.GluaError;
 @Sql(scripts = { "classpath:errortracker-schema.sql",
 		"classpath:errortracker-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 //@ActiveProfiles("test")
-public class GluaErrorIntergrationTest {
+class GluaErrorIntergrationTest {
 
 	@Autowired
 	private MockMvc mvc;

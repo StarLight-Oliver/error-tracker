@@ -10,15 +10,6 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class GluaError {
-/* 
-{
-	"hash" = "2450691011",
-	"realm" = "sv",
-	"shortErr" = "gamemodes/starwarsrp/gamemode/modules/lightsaber_system/weapons/weapon_lightsaber_base/init.lua:271: attempt to index a nil value",
-	"stack" = "1. unknown - gamemodes/starwarsrp/gamemode/modules/lightsaber_system/weapons/weapon_lightsaber_base/init.lua:271"
-}	
-*/
-	
 	@Id
 	private String hash;
 	
@@ -32,8 +23,8 @@ public class GluaError {
 	
 	@ManyToMany(targetEntity = Developer.class,cascade = CascadeType.ALL )
 	private List<Developer> developers = new ArrayList<>();
-	
 	public GluaError() {
+		// Empty because its spring
 		
 	}
 
@@ -95,8 +86,8 @@ public class GluaError {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		var prime = 31;
+		var result = 1;
 		result = prime * result + ((count == null) ? 0 : count.hashCode());
 		result = prime * result + ((developers == null) ? 0 : developers.hashCode());
 		result = prime * result + ((hash == null) ? 0 : hash.hashCode());

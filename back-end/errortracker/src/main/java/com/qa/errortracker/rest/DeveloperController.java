@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.errortracker.domain.Developer;
 import com.qa.errortracker.domain.DeveloperDTO;
 import com.qa.errortracker.service.DeveloperService;
 
@@ -25,7 +24,7 @@ public class DeveloperController {
 	}
 	
 	@PostMapping("/create")
-	public DeveloperDTO create(@RequestBody Developer dev) {
+	public DeveloperDTO create(@RequestBody DeveloperDTO dev) {
 		return this.service.create(dev);
 	}
 	

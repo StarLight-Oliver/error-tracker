@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.qa.errortracker.domain.GluaError;
 import com.qa.errortracker.domain.GluaErrorDTO;
 import com.qa.errortracker.service.ErrorService;
 
@@ -22,7 +21,7 @@ public class ErrorController {
 	}
 	
 	@PostMapping("/create")
-	public GluaErrorDTO create(@RequestBody GluaError err) {
+	public GluaErrorDTO create(@RequestBody GluaErrorDTO err) {
 		return this.service.create(err);
 	}
 		
@@ -38,7 +37,7 @@ public class ErrorController {
 	
 	
 	@PutMapping("/update/{hash}")
-	public GluaErrorDTO update(@RequestBody GluaError err,  @PathVariable String hash) {
+	public GluaErrorDTO update(@RequestBody GluaErrorDTO err,  @PathVariable String hash) {
 		return this.service.update(err, hash);
 	}
 	
