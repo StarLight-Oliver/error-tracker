@@ -136,4 +136,10 @@ public class GluaErrorDTO {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "GluaErrorDTO [hash=" + hash + ", name=" + name + ", shortErr=" + shortErr + ", stack=" + stack
+				+ ", count=" + count + ", developers=" + developers + ", state=" + state + "]";
+	}
 }

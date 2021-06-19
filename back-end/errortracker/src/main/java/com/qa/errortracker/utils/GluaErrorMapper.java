@@ -52,11 +52,14 @@ public class GluaErrorMapper implements Mapper<GluaErrorDTO, GluaError> {
 		err.setStack(dto.getStack());
 		err.setState(dto.getState());
 		
-		List<Developer> devs = new ArrayList<>();
-		for (DeveloperDTO devDTO : dto.getDevelopers()) {
-			devs.add(this.mapper.fromDTO(devDTO));
+		List<DeveloperDTO> a = dto.getDevelopers();
+		if (a != null) {
+			List<Developer> devs = new ArrayList<>();
+			for (DeveloperDTO devDTO : a) {
+				devs.add(this.mapper.fromDTO(devDTO));
+			}
+			err.setDevelopers(devs);
 		}
-		err.setDevelopers(devs);
 		
 		return err;
 	}
