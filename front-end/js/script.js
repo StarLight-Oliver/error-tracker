@@ -432,6 +432,7 @@ for (let but of menus) {
 					let resp2 = await axios.delete("/api/developer/delete/" + btn.data.id)
 					if (resp2.data) {
 						btn.remove();
+						location.reload();
 					}
 				}
 				deleteDeveloper();

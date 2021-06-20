@@ -70,16 +70,15 @@ class DeveloperIntegrationTest {
 		
 	}
 	
-//	@Test 
-//	void testUpdate() throws Exception {
-//		Developer dev = new Developer();
-//		dev.setId(1L);
-//		dev.setName("Beta");
-//		String devJson = this.mapper.writeValueAsString(dev);
-//		
-//		this.mvc.perform(put("/api/developer/update/1").content(devJson).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().json(devJson));
-//	
-//	}
+	@Test 
+	void testUpdate() throws Exception {
+		Developer dev = new Developer();
+		dev.setId(1L);
+		dev.setName("Beta");
+		String devJson = this.mapper.writeValueAsString(dev);
+		
+		this.mvc.perform(put("/api/developer/update/1").content(devJson).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().json(devJson));
+	}
 	
 	@Test
 	void testDelete() throws Exception {
