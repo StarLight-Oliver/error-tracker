@@ -46,6 +46,7 @@ var getAllDevs;
 
 			openModal("Add new Error", (bg, closeBtn) => {
 				let form = document.createElement("form");
+				form.autocomplete = "off";
 				form.method = "post";
 				form.action = "/";
 				let fieldset = document.createElement("fieldset");
@@ -239,14 +240,14 @@ var getAllDevs;
 				selector.appendChild(option);
 			}
 
-			// add a click and then a combo select
 			developerDiv.appendChild(selector);
 
 			let btn = document.createElement("button");
-			btn.innerText = "Add Developer"
+			btn.innerText = "Add Developer";
 
 			btn.addEventListener("click", async function(ev){
-				card.data.developers.push(devs[selector.value])
+				ev.preventDefault();
+				card.data.developers.push(devs[selector.value]);
 
 				let resp = await axios.put("/api/error/update/" + card.data.hash, card.data);				
 
@@ -264,11 +265,9 @@ var getAllDevs;
 
 		let head = document.createElement("h4");
 		head.classList.add("text-center", "text-lg");
-		head.innerText = "Actions"
+		head.innerText = "Actions";
 
-		bg.appendChild(head)
-
-
+		bg.appendChild(head);
 		
 		let dropdowndiv = document.createElement("div")
 		dropdowndiv.classList.add("dropdown")
@@ -310,14 +309,10 @@ var getAllDevs;
 
 		move.addEventListener("click", function(ev) {
 			ev.preventDefault();
-
 			listDiv.classList.toggle("hidden");
-
 		})
 
 		bg.appendChild(dropdowndiv);
-
-
 		// DELETE BUTTON
 		let deleteBtn = document.createElement("button")
 		deleteBtn.classList.add("btn-blue")
@@ -339,9 +334,6 @@ var getAllDevs;
 		})
 
 		bg.appendChild(deleteBtn)
-
-		// <button id = "addTodo" class="btn-blue add-error">Add Error</button>
-
 	};
 
 
@@ -462,6 +454,7 @@ for (let but of menus) {
 
 		openModal("Add Developer", (bg, closeBtn) => {
 			let form = document.createElement("form");
+			form.autocomplete = "off";
 			let fieldset = document.createElement("fieldset")
 
 			let legend = document.createElement("legend");
