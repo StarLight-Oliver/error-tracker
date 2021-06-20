@@ -14,14 +14,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@Sql(scripts = { "classpath:errortracker-schema.sql",
-		"classpath:errortracker-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = { "classpath:errortracker-schema.sql", "classpath:errortracker-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD
+)
+@ActiveProfiles("test")
 public class ErrorTest {
-
 	private WebDriver driver;
 
 	@BeforeEach
@@ -38,7 +39,6 @@ public class ErrorTest {
 		WebElement element = driver.findElement(By.cssSelector("#addTodo"));
 		
 		element.click();
-		
 		
 		element = driver.findElement(By.cssSelector("#error-name"));
 		element.sendKeys("Oliver");
