@@ -4,16 +4,22 @@ This is an error tracker, I don't know how complicated it will be yet
 
 
 Prerequisites
+```
 NPM
 Java 11
 Eclipse 2020-12
+```
+How to install front end
 
-How to install
-
-
+```
 cd into the front-end
 run npm install
+```
 
+# How to configure
+
+go into application.properties
+configure the details there
 
 
 How to build the application
@@ -32,4 +38,4 @@ Oliver
 
 Acknowledgments
 CSS Framework: https://tailwindcss.com
-https://github.com/SheetJS/js-crc32
+JS Crc32: https://github.com/SheetJS/js-crc32
