@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Error Tracker</title>
+		
+		<link href="/css/tailwind.css" rel="stylesheet">
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crc-32/1.2.0/crc32.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	</head>
+	<body class="bg-gray-100">
+		<!-- THIS IS THE MODAL -->
+		<div id = "modal" class="z-50 w-screen h-full absolute backdrop-filter backdrop-blur flex items-center hidden">
+			<div class="w-1/3 h-2/3 rounded-3xl bg-gray-900 mx-auto relative p-10 text-gray-100">
+				<h3 id="modalTitle" class="text-center text-xl mb-2 drop-shadow-sm font-bold"></h3>
+				<div id="modalBg" class="w-full h-full max-h-full max-w-full break-all">
+				</div>
+				<button id="modalBtn" class="absolute top-2 right-3 text-center hover:text-gray-400">X</button>
+			</div>
+		</div>
+		
+		<nav class="bg-gray-300 mb-5 p-1">
+			<h1 class="text-4xl font-bold text-center text-blue-500 inline-block ml-16">
+				Error Tracker
+			</h1>
+
+			<div class="dropdown inline-block float-right mr-8">
+				<button class="btn-dropdown button inline-block">Developers</button>
+				<div class="dropdown-content bg-gray-500 hidden">
+					<ul id = "dev-list">
+						<li>
+							<button id="dev-btn" class="bg-white rounded-md mx-2 px-2 my-2">
+								+
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+	<article class = "h-full">
+		<div class="space-x-4 flex pl-4 pr-4 z-0 h-full" >
+			<div class="container inline-block rounded-lg bg-gray-700 w-32 flex-grow p-2 h-full">
+				<header>
+					<h3 class="text-center text-2xl font-bold text-gray-50 mb-2">Todo</h3>
+				</header>
+				<div id ="todo-div" class="bg-gray-400">
+				</div>
+				<footer class="content-center px-auto object-fill flex bg-gray-700 pt-2">
+					<div class="flex-grow"></div>
+					<button id = "addTodo" class="btn-blue add-error">Add Error</button>
+					<div class="flex-grow"></div>
+				</footer>
+			</div>
+			<div class="ccontainer inline-block rounded-lg bg-gray-700 w-32 flex-grow p-2 h-full">
+				<header>
+					<h3 class="text-center text-2xl font-bold text-gray-50 mb-2">Working on</h3>
+				</header>
+				<div id="working-div" class="bg-gray-400">
+				</div>
+				<footer class="content-center px-auto object-fill flex bg-gray-700 pt-2">
+					<div class="flex-grow"></div>
+					<button id="addWorking" class="btn-blue add-error">Add Error</button>
+					<div class="flex-grow"></div>
+				</footer>
+			</div>
+			<div class="container inline-block rounded-lg bg-gray-700 w-32 flex-grow p-2 h-full">
+				<header>
+					<h3 class="text-center text-2xl font-bold text-gray-50 mb-2">Fixed</h3>
+				</header>
+				<div id="fixed-div" class="bg-gray-400">
+				</div>
+				<footer class="content-center px-auto object-fill flex bg-gray-700 pt-2">
+					<div class="flex-grow"></div>
+					<button id="addWorking" class="btn-blue add-error">Add Error</button>
+					<div class="flex-grow"></div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script type="module" src="/js/script.js"></script>
+</body>
+</html>

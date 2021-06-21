@@ -21,3 +21,15 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+front-end/node_modules/*
+*.sqlite
+front-end/package-lock.json
+front-end/dist/*
+front-end/.vs/front-end/v16/.suo
+front-end/.vs/ProjectSettings.json
+front-end/.vs/VSWorkspaceState.json
+back-end/errortracker/src/main/resources/static/js/script.js
+back-end/errortracker/src/main/resources/static/index.html
+back-end/errortracker/src/main/resources/static/assets/index.*.css
+back-end/errortracker/src/main/resources/static/assets/index.*.js
+todo.txt
