@@ -6,7 +6,6 @@ public class DeveloperDTO {
 	private String name;
 	public DeveloperDTO() {
 		// Empty because its spring
-	
 	}
 
 	public Long getId() {

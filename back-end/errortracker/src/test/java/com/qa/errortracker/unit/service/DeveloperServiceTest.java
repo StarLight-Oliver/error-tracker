@@ -25,7 +25,6 @@ class DeveloperServiceTest {
 	@MockBean
 	private DeveloperRepo repo;
 	
-	
 	@Test
 	void testGet() {
 
@@ -45,7 +44,6 @@ class DeveloperServiceTest {
 		assertThat(this.service.get(Id)).isEqualTo(returning);
 		
 		Mockito.verify(this.repo, Mockito.times(1)).findById(Id);
-		
 	}
 	
 	@Test

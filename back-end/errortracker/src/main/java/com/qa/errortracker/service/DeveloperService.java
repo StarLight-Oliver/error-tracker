@@ -40,6 +40,16 @@ public class DeveloperService {
 		return this.mapper.toDTO(existing);
 	}
 	
+	public DeveloperDTO update(DeveloperDTO devDTO, Long id) {
+		Developer dev = this.mapper.fromDTO(devDTO);
+
+		Developer existing = this.repo.findById(id).orElseThrow( ()-> new EntityNotFoundException() );
+		existing.setName(dev.getName());
+
+		Developer updated = this.repo.save(existing);
+		return this.mapper.toDTO(updated);
+	}
+
 	public boolean delete(Long id) {
 		this.repo.deleteById(id);
 		return !this.repo.existsById(id);

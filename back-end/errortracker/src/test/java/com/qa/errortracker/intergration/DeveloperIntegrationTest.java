@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,7 +27,7 @@ import com.qa.errortracker.domain.Developer;
 @AutoConfigureMockMvc
 @Sql(scripts = { "classpath:errortracker-schema.sql",
 		"classpath:errortracker-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-
+@ActiveProfiles("test")
 class DeveloperIntegrationTest {
 	@Autowired
 	private MockMvc mvc;
@@ -70,16 +71,15 @@ class DeveloperIntegrationTest {
 		
 	}
 	
-//	@Test 
-//	void testUpdate() throws Exception {
-//		Developer dev = new Developer();
-//		dev.setId(1L);
-//		dev.setName("Beta");
-//		String devJson = this.mapper.writeValueAsString(dev);
-//		
-//		this.mvc.perform(put("/api/developer/update/1").content(devJson).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().json(devJson));
-//	
-//	}
+	@Test 
+	void testUpdate() throws Exception {
+		Developer dev = new Developer();
+		dev.setId(1L);
+		dev.setName("Beta");
+		String devJson = this.mapper.writeValueAsString(dev);
+		
+		this.mvc.perform(put("/api/developer/update/1").content(devJson).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().json(devJson));
+	}
 	
 	@Test
 	void testDelete() throws Exception {

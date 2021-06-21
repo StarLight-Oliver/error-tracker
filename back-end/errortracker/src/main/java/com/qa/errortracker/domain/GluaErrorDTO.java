@@ -1,6 +1,7 @@
 package com.qa.errortracker.domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class GluaErrorDTO {
 
@@ -12,7 +13,7 @@ public class GluaErrorDTO {
 	
 	private Integer count;
 	
-	private List<DeveloperDTO> developers;
+	private Set<DeveloperDTO> developers;
 	
 	private Short state;
 	public GluaErrorDTO() {
@@ -52,11 +53,11 @@ public class GluaErrorDTO {
 		this.count = count;
 	}
 
-	public List<DeveloperDTO> getDevelopers() {
+	public Set<DeveloperDTO> getDevelopers() {
 		return developers;
 	}
 
-	public void setDevelopers(List<DeveloperDTO> developers) {
+	public void setDevelopers(Set<DeveloperDTO> developers) {
 		this.developers = developers;
 	}
 	

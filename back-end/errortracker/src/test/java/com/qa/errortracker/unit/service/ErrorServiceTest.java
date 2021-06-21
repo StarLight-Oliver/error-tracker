@@ -2,7 +2,7 @@ package com.qa.errortracker.unit.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -48,7 +48,7 @@ public class ErrorServiceTest {
 		returning.setStack(stack);		
 		returning.setCount(count);
 		returning.setState(state);
-		returning.setDevelopers(new ArrayList<DeveloperDTO>());
+		returning.setDevelopers(new HashSet<DeveloperDTO>());
 		
 		Mockito.when(this.repo.save(existing)).thenReturn(existing);
 		

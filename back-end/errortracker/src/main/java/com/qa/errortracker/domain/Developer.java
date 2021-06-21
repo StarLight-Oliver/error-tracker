@@ -1,6 +1,6 @@
 package com.qa.errortracker.domain;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,8 +22,8 @@ public class Developer {
 	
 	private String name;
 
-	@ManyToMany(targetEntity = GluaError.class, mappedBy = "developers", cascade = CascadeType.ALL )
-	private List<GluaError> errors;
+	@ManyToMany(targetEntity = GluaError.class, mappedBy = "developers", cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH} )
+	private Set<GluaError> errors;
 	
 	public Developer() {
 		// Empty because its spring
