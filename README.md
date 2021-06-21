@@ -24,8 +24,8 @@ go into application.properties
 configure the details there
 
 
-How to build the application
-
+#How to build the application
+```
 cd into the front-end
 npm run build
 
@@ -33,11 +33,13 @@ copy the files from dist into back-end/errortracker/src/main/resources/static
 
 cd into back-end/errortracker
 mvn clean package
+```
+#Authors
 
-Authors
 Oliver
 
 
-Acknowledgments
+# Acknowledgments
 CSS Framework: https://tailwindcss.com
+
 JS Crc32: https://github.com/SheetJS/js-crc32
