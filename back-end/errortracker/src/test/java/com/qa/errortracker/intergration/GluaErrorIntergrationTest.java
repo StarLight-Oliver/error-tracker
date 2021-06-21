@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,11 +64,11 @@ class GluaErrorIntergrationTest {
 		dev.setId(1L);
 		dev.setName("Alpha");
 		
-		List<Developer> listDevs = List.of(dev);
+		Set<Developer> listDevs = Set.of(dev);
 
 		err.setDevelopers(listDevs);
 
-		List<GluaError> listErrs = List.of(err);
+		Set<GluaError> listErrs = Set.of(err);
 		
 		String errsJson = this.mapper.writeValueAsString(listErrs);
 		
@@ -87,7 +88,7 @@ class GluaErrorIntergrationTest {
 		dev.setId(1L);
 		dev.setName("Alpha");
 		
-		List<Developer> listDevs = List.of(dev);
+		Set<Developer> listDevs = Set.of(dev);
 
 		err.setDevelopers(listDevs);
 	
@@ -117,10 +118,10 @@ class GluaErrorIntergrationTest {
 		dev.setId(1L);
 		dev.setName("Alpha");
 		
-		List<Developer> listDevs = List.of(dev);
+		Set<Developer> listDevs = Set.of(dev);
 
 		err.setDevelopers(listDevs);
-			
+		
 		String errJson = this.mapper.writeValueAsString(err);
 		
 		this.mvc.perform(put("/api/error/update/" + err.getHash()).content(errJson).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().json(errJson));

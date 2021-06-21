@@ -1,7 +1,8 @@
 package com.qa.errortracker.domain;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,8 +22,8 @@ public class GluaError {
 	
 	private Short state;
 	
-	@ManyToMany(targetEntity = Developer.class,cascade = CascadeType.ALL )
-	private List<Developer> developers = new ArrayList<>();
+	@ManyToMany(targetEntity = Developer.class, cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH} )
+	private Set<Developer> developers = new HashSet<>();
 	public GluaError() {
 		// Empty because its spring
 		
@@ -60,11 +61,11 @@ public class GluaError {
 		this.count = count;
 	}
 
-	public List<Developer> getDevelopers() {
+	public Set<Developer> getDevelopers() {
 		return developers;
 	}
 
-	public void setDevelopers(List<Developer> developers) {
+	public void setDevelopers(Set<Developer> developers) {
 		this.developers = developers;
 	}
 

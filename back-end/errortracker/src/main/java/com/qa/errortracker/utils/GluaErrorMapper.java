@@ -1,7 +1,7 @@
 package com.qa.errortracker.utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class GluaErrorMapper implements Mapper<GluaErrorDTO, GluaError> {
 		dto.setStack(err.getStack());
 		dto.setState(err.getState());
 		
-		List<DeveloperDTO> devs = new ArrayList<>();
+		HashSet<DeveloperDTO> devs = new HashSet<>();
 		for (Developer dev : err.getDevelopers()) {
 			devs.add(this.mapper.toDTO(dev));
 		}
@@ -52,9 +52,9 @@ public class GluaErrorMapper implements Mapper<GluaErrorDTO, GluaError> {
 		err.setStack(dto.getStack());
 		err.setState(dto.getState());
 		
-		List<DeveloperDTO> a = dto.getDevelopers();
+		Set<DeveloperDTO> a = dto.getDevelopers();
 		if (a != null) {
-			List<Developer> devs = new ArrayList<>();
+			HashSet<Developer> devs = new HashSet<>();
 			for (DeveloperDTO devDTO : a) {
 				devs.add(this.mapper.fromDTO(devDTO));
 			}

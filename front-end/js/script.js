@@ -144,7 +144,7 @@ var getAllDevs;
 
 					let createError = async ()=> {
 						closeBtn.click();
-						let resp = await axios.post("/api/error/create", data)
+						let resp = await axios.post("/api/error/create", data);
 						if (resp.data) {
 							makeCard(resp.data);
 						}
@@ -153,9 +153,7 @@ var getAllDevs;
 					createError();
 				})
 
-
-				form.appendChild(submit)
-				
+				form.appendChild(submit);
 				bg.appendChild(form);
 			})
 		})
