@@ -2,6 +2,8 @@
 This is an error tracker, I don't know how complicated it will be yet
 
 
+Jira board: (link)[https://odillion-qa.atlassian.net/jira/software/projects/EL/boards/]
+
 
 Prerequisites
 ```
